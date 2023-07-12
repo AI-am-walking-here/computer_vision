@@ -7,7 +7,7 @@ cap = cv2.VideoCapture(0)
 
 # Setting object using Hands class
 mpHands = mp.solutions.hands
-hands = mpHands.Hands()
+hands = mpHands.Hands(max_num_hands=4)
 mpDraw = mp.solutions.drawing_utils
 
 # Previous time / Current time variables for FPS calc
