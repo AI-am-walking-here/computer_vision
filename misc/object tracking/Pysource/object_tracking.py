@@ -1,9 +1,9 @@
 import cv2 as cv
 
-capture_obj = cv.VideoCapture('C:/Users/dalto/Desktop/Coding/computer_vision/misc/object tracking/traffic_video1.mp4')
+capture_obj = cv.VideoCapture('C:/Users/dalto/Desktop/Coding/computer_vision/misc/object tracking/Pysource/traffic_video1.mp4')
 
 # Object detection from a stable camera
-object_detector = cv.createBackgroundSubtractorMOG2()
+object_detector = cv.createBackgroundSubtractorMOG2(history=300, varThreshold=10)
 
 
 
@@ -13,7 +13,7 @@ while capture_obj.isOpened():
     height, width, _ = frame.shape
     print(height, width) # 1920 x 1080
     # Extract Region of Interest(ROI) 
-    roi = frame[340: 600,  500: 700]
+    roi = frame[550: 1080,  600: 1920]
 
 
     # If ret_val is False, the video file has ended or error reading the frames.
@@ -22,14 +22,17 @@ while capture_obj.isOpened():
         break
 
     # Object detection
-    detector_mask = object_detector.apply(frame)
-    contours, _ = cv.findContours(detector_mask, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    detector_mask = object_detector.apply(roi)
+    _, detector_mask = cv.threshold(detector_mask, 254, 255, cv.THRESH_BINARY)
+    contours, _ = cv.findContours(detector_mask, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
     for i in contours:
         # Calculate area and remove small noise elements
         area = cv.contourArea(i)
-        if area > 100:
-            cv.drawContours(frame, [i], -1, (0,0,255), 3)
+        if area > 500:
+            # cv.drawContours(roi, [i], -1, (0,0,255), 3)
+            x, y, w, h = cv.boundingRect(i)
+            cv.rectangle(roi, (x,y), (x + w, y + w), (0,0,255), 3)
 
 
     cv.imshow("frame", frame)
