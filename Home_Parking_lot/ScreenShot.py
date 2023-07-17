@@ -28,14 +28,14 @@ def take_photo():
         raise ValueError("Can't read frame")
 
     # Format the filename as 'YYYY-MM-DD_HH-MM-SS.png'
-    timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M')
     filename = os.path.join(save_path, f'{timestamp}.png')
 
     # Save the image
     cv2.imwrite(filename, frame)
 
 # Schedule the photo to be taken every 15 minutes
-schedule.every(1).minutes.do(take_photo)
+schedule.every(15).minutes.do(take_photo)
 
 try:
     while True:
