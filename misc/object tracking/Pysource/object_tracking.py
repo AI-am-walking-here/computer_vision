@@ -1,4 +1,5 @@
 import cv2 as cv
+from ultralytics import YOLO
 
 capture_obj = cv.VideoCapture('C:/Users/dalto/Desktop/Coding/computer_vision/misc/object tracking/Pysource/traffic_video1.mp4')
 
