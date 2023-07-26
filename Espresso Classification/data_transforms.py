@@ -37,7 +37,7 @@ data_transforms = {
         transforms.RandomRotation(15),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-        ]),
+    ]),
 
     'quiz': transforms.Compose([
         transforms.ToTensor(),
@@ -59,8 +59,7 @@ image_datasets = {
 
 # Create dataloaders
 dataloaders = {
-    'train': torch.utils.data.DataLoader(image_datasets['train'], batch_size=4, shuffle=True, num_workers=6),
-    'quiz': torch.utils.data.DataLoader(image_datasets['quiz'], batch_size=4, shuffle=False, num_workers=6),
-    'test': torch.utils.data.DataLoader(image_datasets['test'], batch_size=4, shuffle=False, num_workers=6),
+    'train': torch.utils.data.DataLoader(image_datasets['train'], batch_size=64, shuffle=True, num_workers=6),
+    'quiz': torch.utils.data.DataLoader(image_datasets['quiz'], batch_size=64, shuffle=False, num_workers=6),
+    'test': torch.utils.data.DataLoader(image_datasets['test'], batch_size=64, shuffle=False, num_workers=6),
 }
-

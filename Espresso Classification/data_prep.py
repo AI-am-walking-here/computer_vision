@@ -38,7 +38,7 @@ for category in categories:
     os.makedirs(train_category_dir, exist_ok=True)
     os.makedirs(test_category_dir, exist_ok=True)
     os.makedirs(quiz_category_dir, exist_ok=True)
-    
+
     # Randomly shuffle the files
     random.shuffle(files)
 
