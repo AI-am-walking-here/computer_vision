@@ -4,6 +4,7 @@ from torchvision import models
 from torch.optim import Adam
 from torch.autograd import Variable
 from data_loader import dataloaders
+import time
 
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -20,7 +21,6 @@ def main():
     vgg16.classifier[6] = nn.Linear(fc_features, 3)
 
     vgg16 = vgg16.to(device)
-    print(next(vgg16.parameters()).device)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = Adam(vgg16.parameters(), lr=0.001)
@@ -42,8 +42,8 @@ def main():
                 for inputs, labels in dataloaders[phase]:
                     inputs = inputs.to(device)
                     labels = labels.to(device)
-                    print(inputs.device)
 
+                    start_time = time.time()
                     optimizer.zero_grad()
 
                     with torch.set_grad_enabled(phase == 'train'):
@@ -55,8 +55,8 @@ def main():
                             loss.backward()
                             optimizer.step()
 
-                            # Add synchronization after backward pass
-                            torch.cuda.synchronize()
+                    end_time = time.time()
+                    print(f"Elapsed time: {end_time - start_time} s")
 
                     running_loss += loss.item() * inputs.size(0)
                     running_corrects += torch.sum(preds == labels.data)
