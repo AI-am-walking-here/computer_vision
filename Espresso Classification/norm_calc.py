@@ -2,7 +2,9 @@ import torch
 from torchvision import datasets
 from torchvision import transforms
 
-# Usefull if creating own NN
+# Normalization Calculator - 
+# Usefull for creating NN from scratch, Not important for transfered learning
+# When transfer learning use pretrain models noramlization params
 
 # Define directories
 data_dir = './data'
