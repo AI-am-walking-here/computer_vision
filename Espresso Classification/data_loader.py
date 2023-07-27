@@ -1,27 +1,9 @@
-import random
-
-# Import PyTorch
 import torch
-from torch import nn
-
-# Import torchvision
-import torchvision
-from torchvision import datasets
+from torchvision import transforms
 from torchvision.datasets import ImageFolder
 
-from torchvision import transforms
-from torchvision.transforms import ToTensor
-
-# Import matplotlib for visualization
-import matplotlib.pyplot as plt
-
-# # Check versions
-# print(torch.__version__)
-# print(torchvision.__version__)
-
-random.seed(117)
+# Set random seed for reproducibility
 torch.manual_seed(117)
-
 
 # Define directories
 data_dir = './data'
@@ -38,12 +20,10 @@ data_transforms = {
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
-
     'quiz': transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
-
     'test': transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
