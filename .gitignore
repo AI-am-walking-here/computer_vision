@@ -1,3 +1,4 @@
 
 *.jpg
 Home_Parking_lot/trained models/basic25.pth
+Espresso Classification/trained models/vgg16_trained_model.pth
