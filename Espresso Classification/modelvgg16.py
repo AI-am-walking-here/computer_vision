@@ -3,29 +3,32 @@ import os
 import torch.nn as nn
 from torchvision import models
 from torch.optim import Adam
-from data_loader import dataloaders  # You need to provide this module
+from data_loader import dataloaders
 import time
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load the pretrained model
-mobilenet = models.mobilenet_v3_small(pretrained=True)
+weights = models.VGG16_Weights.IMAGENET1K_V1 # '.DEFAULT' would also work
+vgg16 = models.MobileNetV3(weights=weights)
+
 
 # Freeze model weights
-for param in mobilenet.parameters():
+for param in vgg16.features.parameters():
     param.requires_grad = False
 
-# Change the final layer of MobileNet Model for Transfer Learning
-num_features = mobilenet.classifier[3].in_features
-num_classes = 3  # Set this to the number of classes in your problem
-mobilenet.classifier[3] = nn.Linear(num_features, num_classes)
+# Change the final layer of VGG16 Model for Transfer Learning
+in_features = vgg16.classifier[6].in_features
+vgg16.classifier[6] = nn.Linear(in_features, 3)
 
-mobilenet = mobilenet.to(device)
+vgg16 = vgg16.to(device)
 
 loss_function = nn.CrossEntropyLoss()
-optimizer = Adam(mobilenet.parameters(), lr=0.001)
+optimizer = Adam(vgg16.parameters(), lr=0.001)
 
 def train_model(model, loss_function, optimizer, num_epochs=25):
+    global vgg16  # Declare vgg16 as a global variable
+
     for epoch in range(num_epochs):
         print('Epoch {}/{}'.format(epoch, num_epochs - 1))
         print('-' * 10)
@@ -69,16 +72,16 @@ def train_model(model, loss_function, optimizer, num_epochs=25):
     return model
 
 def main():
-    global mobilenet  # Declare mobilenet as a global variable
-    mobilenet = train_model(mobilenet, loss_function, optimizer, num_epochs=25)
+    global vgg16  # Declare vgg16 as a global variable
+    vgg16 = train_model(vgg16, loss_function, optimizer, num_epochs=25)
 
     # Create the folder 'trained models' if it doesn't exist
     save_folder = 'trained models'
     os.makedirs(save_folder, exist_ok=True)
 
     # Save the model to the specified path
-    save_path = os.path.join(save_folder, 'mobilenet_trained_model.pth')
-    torch.save(mobilenet.state_dict(), save_path)
+    save_path = os.path.join(save_folder, 'vgg16_trained_model.pth')
+    torch.save(vgg16.state_dict(), save_path)
 
 if __name__ == '__main__':
     main()
