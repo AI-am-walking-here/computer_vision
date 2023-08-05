@@ -10,7 +10,9 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load the pretrained model
 weights = models.VGG16_Weights.IMAGENET1K_V1 # '.DEFAULT' would also work
-vgg16 = models.MobileNetV3(weights=weights)
+vgg16 = models.vgg16(weights=weights)
+vgg16.eval()
+
 
 
 # Freeze model weights
