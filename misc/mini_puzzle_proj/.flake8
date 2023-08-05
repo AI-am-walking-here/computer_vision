@@ -1,0 +1,19 @@
+[flake8]
+ignore =
+    # Error codes (E):
+    E226, # Missing whitespace around arithmetic operator
+    E231, # Missing whitespace after ',', ';', or ':'
+    E261, # At least two spaces before inline comment
+    E265, # Block comment should start with '# '
+    E302, # Expected 2 blank lines, found 0
+    E303, # Too many blank lines
+    E305, # Expected 2 blank lines after class or function definition
+    E501, # Line too long
+    E262, # Inline comment should start with '# '
+    
+    # Warning codes (W):
+    W291, # Trailing whitespace
+    W292, # No newline at end of file
+    W293, # Blank line contains whitespace
+    W391, # Blank line at end of file
+    W503, # Line break occurred before a binary operator
