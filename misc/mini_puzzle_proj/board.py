@@ -1,10 +1,10 @@
-import random
-import time
-from pieces import *
+from pieces import pieces
 
 
 class GameBoard:
     def __init__(self, width, height):
+        self.width = width
+        self.height = height
         self.board_matrix = self.create_board(width, height)
         
 
@@ -16,15 +16,21 @@ class GameBoard:
                 row.append('.')
             board_matrix.append(row)
         return board_matrix
+    
+    
 
-    def can_piece_fit(self, board_matrix, piece, x, y):
+
+#######################
+
+
+    def can_piece_fit(self, piece, x, y):
         try:
-            for r, row in enumerate(piece):
-                for c, spot in enumerate(row):
+            for r, row in enumerate(piece): # r is in idex and row is item
+                for c, spot in enumerate(row): # c is in idex and spot is item
                     if spot != '.':
-                        if board_matrix[r + y][c + x] != '.':
+                        if self.board_matrix[r + y][c + x] != '.':
                             return False
-            return True
+                return True
         
         except IndexError:
             return False
