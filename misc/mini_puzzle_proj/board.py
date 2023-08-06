@@ -17,34 +17,38 @@ class GameBoard:
             board_matrix.append(row)
         return board_matrix
     
-    
+    def can_piece_fit(self, piece, coordinate):
+        x, y = coordinate  # Unpacking the tuple into x and y
+        try:
+            for r, row in enumerate(piece): # r is index and row is item
+                for c, spot in enumerate(row): # c is index and spot is item
+                    if spot != '.':
+                        if self.board_matrix[r + y][c + x] != '.':
+                            return False
+            return True
+
+        except IndexError:
+            return False
+
 
 
 #######################
 
 
-    def can_piece_fit(self, piece, x, y):
-        try:
-            for r, row in enumerate(piece): # r is in idex and row is item
-                for c, spot in enumerate(row): # c is in idex and spot is item
-                    if spot != '.':
-                        if self.board_matrix[r + y][c + x] != '.':
-                            return False
-                return True
-        
-        except IndexError:
-            return False
 
-    def place_piece(self, board_matrix, piece, x, y):
-        try:
-            for r, row in enumerate(piece):
-                for c, spot in enumerate(row):
-                    if spot != '.':
-                        board_matrix[r + y][c + x] = spot
-            return board_matrix
-        except IndexError:
-            print(f'Couldn\'t place piece at ({x} {y})')
-            return board_matrix
+    # def place_piece(self, piece, x, y):
+    #     if self.can_piece_fit(piece, x, y):
+    #         for i, row in enumerate(piece):
+    #             for j, value in enumerate(row):
+
+    #         return self.board_matrix
+        
+    #     else:
+    #         print(f'Couldn\'t place piece at ({x}, {y})')
+
+
+
+
         
     def remove_piece(self, board_matrix, piece, x, y):
         try:
