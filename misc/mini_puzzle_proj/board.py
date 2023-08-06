@@ -39,8 +39,7 @@ class GameBoard:
         Checks if a game piece can fit onto the game board at a specific coordinate.
 
         Args:
-            piece (list): A 2D list representing the game piece. Each cell is denoted by a character, with '.' indicating an empty cell.
-
+            piece (Piece): An instance of the Piece class.
             coordinate (tuple): A tuple representing the coordinates (x, y) on the board where the top-left cell of the piece should be placed.
 
         Returns:
@@ -48,7 +47,7 @@ class GameBoard:
         """
         x, y = coordinate  # Unpacking the tuple into x and y
         try:
-            for r, row in enumerate(piece): # r is index and row is item
+            for r, row in enumerate(piece.array): # r is index and row is item
                 for c, spot in enumerate(row): # c is index and spot is item
                     if spot != '.':
                         if self.board_matrix[r + y][c + x] != '.':

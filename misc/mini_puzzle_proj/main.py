@@ -1,8 +1,8 @@
 from board import GameBoard
 from display import Display
 from pointer import Pointer
-from pieces import pieces
-from piece_functions import *
+from pieces import Piece
+
 
 
 
@@ -12,19 +12,20 @@ BOARD_HEIGHT = 5
 
 
 # Initial Variables
-pointer_location = (1,1)
 pieces_avaliable = ['A','B','C','D','E','F','G','H','I','J','K','L',]
-chosen_piece_label = pieces_avaliable[0] # Defaults to what is left
-current_piece = pieces[chosen_piece_label] # Uses the 'label' to search in the pieces dictionary for the np array
+default_label = pieces_avaliable[0] # Defaults to what is left
 
 
 # Initialize a GameBoard + Display + Pointer Class instance
 game_board = GameBoard(BOARD_WIDTH, BOARD_HEIGHT)
 display = Display(game_board.board_matrix)  # Pass the board matrix to Display
 pointer = Pointer()
-print(pointer)
+current_piece = Piece(default_label)
 
-print(game_board.can_piece_fit(current_piece, pointer_location))
+
+print(current_piece)
+print(pointer)
+print(game_board.can_piece_fit(current_piece, pointer.position()))
 
 
 # Print the Board

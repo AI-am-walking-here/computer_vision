@@ -1,5 +1,3 @@
-#make a pointer class
-
 class Pointer():
     def __init__(self):
         self.x = 1 

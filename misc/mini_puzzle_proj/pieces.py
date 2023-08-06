@@ -1,5 +1,27 @@
 import numpy as np
 
+
+class Piece:
+    def __init__(self, label):
+        self.label = label
+        self.array = pieces[label]
+    
+    def Change_piece(self, new_label):
+        self.label = new_label
+        self.array = pieces[new_label]
+
+    def rotate(self):
+        """
+        Clockwise rotation
+        """
+        self.array = np.rot90(self.array)
+
+    def flip_horizontal(self):
+        """
+        Flips Left-->Right
+        """
+        self.array = np.fliplr(self.array)
+
 pieces = {
     "A": np.array([
         ["A", ".", "."],
