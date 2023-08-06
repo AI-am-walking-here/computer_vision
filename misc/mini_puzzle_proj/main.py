@@ -1,5 +1,6 @@
 from board import GameBoard
 from display import Display
+from pointer import Pointer
 from pieces import pieces
 from piece_functions import *
 
@@ -17,10 +18,11 @@ chosen_piece_label = pieces_avaliable[0] # Defaults to what is left
 current_piece = pieces[chosen_piece_label] # Uses the 'label' to search in the pieces dictionary for the np array
 
 
-# Initialize a GameBoard + Display Class instance
+# Initialize a GameBoard + Display + Pointer Class instance
 game_board = GameBoard(BOARD_WIDTH, BOARD_HEIGHT)
 display = Display(game_board.board_matrix)  # Pass the board matrix to Display
-
+pointer = Pointer()
+print(pointer)
 
 print(game_board.can_piece_fit(current_piece, pointer_location))
 
