@@ -9,6 +9,23 @@ class GameBoard:
         
 
     def create_board(self, width, height):
+        """
+        Creates a 2D matrix representing a game board.
+
+        Args:
+            width (int): The width of the game board. This parameter dictates the number of columns in the board.
+
+            height (int): The height of the game board. This parameter dictates the number of rows in the board.
+
+        Returns:
+            list: A 2D list (matrix) filled with '.' as placeholders, representing an empty game board. Each '.' represents a cell on the board.
+
+        Note:
+            This function assumes valid integer inputs for width and height. It does not handle erroneous inputs, negative values, or non-integer types. 
+
+            The game board is initialized with all cells as '.', indicating they're unoccupied. Different symbols may later replace these placeholders to represent game pieces or players.
+
+        """
         board_matrix = []
         for _ in range(height):
             row = []
@@ -18,6 +35,17 @@ class GameBoard:
         return board_matrix
     
     def can_piece_fit(self, piece, coordinate):
+        """
+        Checks if a game piece can fit onto the game board at a specific coordinate.
+
+        Args:
+            piece (list): A 2D list representing the game piece. Each cell is denoted by a character, with '.' indicating an empty cell.
+
+            coordinate (tuple): A tuple representing the coordinates (x, y) on the board where the top-left cell of the piece should be placed.
+
+        Returns:
+            bool: Returns True if the game piece can fit at the specified coordinate on the game board without colliding with any existing pieces or going outside the bounds of the board. Returns False otherwise.
+        """
         x, y = coordinate  # Unpacking the tuple into x and y
         try:
             for r, row in enumerate(piece): # r is index and row is item
