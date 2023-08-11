@@ -1,7 +1,7 @@
 class Pointer():
     def __init__(self):
-        self.x = 1 
-        self.y = 1
+        self.x = 0 
+        self.y = 0
         
     def position(self):
         return (self.x, self.y)

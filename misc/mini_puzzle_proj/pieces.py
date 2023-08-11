@@ -5,8 +5,16 @@ class Piece:
     def __init__(self, label):
         self.label = label
         self.array = pieces[label]
+        
     
     def Change_piece(self, new_label):
+        """
+        Changes the current piece to a new piece.
+
+        Args:
+            new_label (str): A single letter string representing the new piece to be used. 
+                            This letter should be a key in the 'pieces' dictionary.
+        """
         self.label = new_label
         self.array = pieces[new_label]
 
@@ -21,6 +29,9 @@ class Piece:
         Flips Left-->Right
         """
         self.array = np.fliplr(self.array)
+
+    def __str__(self):
+        return self.label
 
 pieces = {
     "A": np.array([

@@ -23,9 +23,10 @@ pointer = Pointer()
 current_piece = Piece(default_label)
 
 
+current_piece.rotate()
 print(current_piece)
 print(pointer)
-print(game_board.can_piece_fit(current_piece, pointer.position()))
+game_board.place_piece(current_piece, pointer.position())
 
 
 # Print the Board
